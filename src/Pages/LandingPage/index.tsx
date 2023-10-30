@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { searchRecipes } from "../../utils/api";
-import { AiFillHeart } from "react-icons/ai";
 
 const LandingPage: React.FC = () => {
   type Recipe = {
@@ -241,7 +240,7 @@ const LandingPage: React.FC = () => {
             href="/favorites"
             className="fixed bottom-8 right-8 cursor-pointer p-4 rounded-full bg-black hover:bg-gray-800 shadow-lg duration-200"
           >
-            <AiFillHeart size={32} color="red" />
+            <img src="/heart.svg" className="h-10 w-10" />
           </a>
         </>
       )}
