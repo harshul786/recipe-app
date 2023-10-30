@@ -39,22 +39,12 @@ const LandingPage: React.FC = () => {
   const [hits, setHits] = useState<Recipe[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [debouncedQuery, setDebouncedQuery] = useState<string>("");
   const [favorites, setFavorites] = useState<Recipe[]>([]);
+  const [isTyping, setIsTyping] = useState<Boolean>(false);
 
   const handleGetStarted = () => {
     setShowLandingPage(false);
     setShowSearchBar(true);
-  };
-
-  const debounce = (fn: Function, delay: number) => {
-    let timer: NodeJS.Timeout;
-    return (...args: any[]) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        fn(...args);
-      }, delay);
-    };
   };
 
   const handleCardClick = (recipe: Recipe) => {
@@ -76,7 +66,6 @@ const LandingPage: React.FC = () => {
   };
 
   useEffect(() => {
-    // Load favorites from local storage when the component mounts
     const storedFavorites = localStorage.getItem("favorites");
     if (storedFavorites) {
       setFavorites(JSON.parse(storedFavorites));
@@ -84,18 +73,13 @@ const LandingPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (query.length > 0) {
+    if (query.length > 0 && isTyping === false) {
       setLoading(true);
-      handleSearch(debouncedQuery).then(() => {
+      handleSearch(query).then(() => {
         setLoading(false);
       });
     } else setHits([]);
-  }, [debouncedQuery, query]);
-
-  useEffect(() => {
-    const debouncedSearch = debounce(setDebouncedQuery, 500);
-    debouncedSearch(query);
-  }, [query]);
+  }, [isTyping, query]);
 
   const handleSearch = async (query: string) => {
     try {
@@ -137,12 +121,28 @@ const LandingPage: React.FC = () => {
         <input
           type="text"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            if (!isTyping) {
+              setIsTyping(true);
+            }
+
+            const lastTypingTime = new Date().getTime();
+            const timerLength = 500;
+            setTimeout(() => {
+              const timeNow = new Date().getTime();
+              const timeDiff = timeNow - lastTypingTime;
+              if (timeDiff >= timerLength && isTyping) {
+                setIsTyping(false);
+              }
+              return setIsTyping(false);
+            }, timerLength);
+          }}
           placeholder="Search for recipes..."
           className="border border-gray-300 rounded-full px-4 py-2 w-[95%] md-w-2/3 lg-w-1/2 text-lg focus-outline-none focus-border-green-500 focus-ring-2 focus-ring-green-500"
         />
         <div className="flex flex-wrap justify-center mt-10">
-          {loading ? (
+          {loading || isTyping ? (
             "Loading recipes..."
           ) : hits.length > 0 ? (
             hits.map((recipe) => (
