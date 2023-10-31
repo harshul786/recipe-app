@@ -181,11 +181,11 @@ const LandingPage: React.FC = () => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="flex items-center justify-center h-[90vh] overflow-y-scroll">
             <div className="modal-overlay absolute inset-0 bg-gray-600 opacity-50"></div>
-            <div className="modal-container bg-white w-11/12 md-max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+            <div className="modal-container h-[90vh] bg-white w-11/12 md-max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
               <div className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
                 <button onClick={handleCloseModal}>Close</button>
               </div>
-              <div className="modal-content py-4 text-left px-6 pt-10">
+              <div className="modal-content h-[90vh] py-4 text-left px-6 pt-10">
                 <img
                   src={selectedRecipe.image}
                   alt={selectedRecipe.label}
