@@ -16,6 +16,8 @@ Welcome to the Recipe Finder Application! This web application allows you to fin
 
 - **Add to Favorites:** You can add recipes to your favorites list.
 
+- **Remove from Favorites:** You can remove recipes from your favorites list.
+
 - **Local Storage:** The application stores your favorite recipes in local storage, so they're available even after a page refresh.
 
 ## Prerequisites
