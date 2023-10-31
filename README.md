@@ -31,3 +31,36 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    git clone https://github.com/harshul786/recipe-app.git
    ```
+2. Navigate to the project directory:
+    ```bash
+     cd recipe-finder-app
+   ```
+3. Install the dependencies:
+ ```bash
+    npm i
+   ```
+
+## Usage
+To start the application, run the following command:
+ ```bash
+    npm start
+   ```
+The application will be accessible at http://localhost:3000.
+
+## Folder Structure
+The project structure is organized as follows:
+
+src: Contains the source code for the application.
+   components: React components used in the application.
+   utils: Utility functions, including API requests.
+   App.tsx: The main application component.
+   index.tsx: The entry point of the application.
+
+## Contributing
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
+
+1. Fork the project.
+2. Create your feature branch: git checkout -b feature/your-feature-name
+3. Commit your changes: git commit -m 'Add some feature'
+4. Push to the branch: git push origin feature/your-feature-name
+5. Create a pull request.
